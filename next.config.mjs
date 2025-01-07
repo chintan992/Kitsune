@@ -1,5 +1,6 @@
 import withPWA from "next-pwa";
 import { withSentryConfig } from "@sentry/nextjs";
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -21,6 +22,15 @@ const nextConfig = {
         maxSize: 25000000, // 25 MiB
       };
     }
+
+    if (process.env.ANALYZE) {
+      config.plugins.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: isServer ? 8888 : 8889,
+        openAnalyzer: true,
+      }));
+    }
+
     return config;
   },
 };

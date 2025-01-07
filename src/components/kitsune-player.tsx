@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef } from "react";
-import ArtPlayer from "./art-player";
-import Hls from "hls.js";
+import dynamic from 'next/dynamic';
 import { IEpisodeSource } from "@/types/episodes";
 import loadingImage from "@/assets/genkai.gif";
+
+const ArtPlayer = dynamic(() => import("./art-player"), { ssr: false });
+import Hls from "hls.js";
 import artplayerPluginHlsControl from "artplayer-plugin-hls-control";
 import artplayerPluginAmbilight from "artplayer-plugin-ambilight";
 
