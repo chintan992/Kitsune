@@ -14,6 +14,15 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        maxSize: 25000000, // 25 MiB
+      };
+    }
+    return config;
+  },
 };
 
 const sentryConfig = withSentryConfig(nextConfig, {
