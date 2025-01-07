@@ -21,6 +21,7 @@ const nextConfig = {
         chunks: 'all',
         maxSize: 25000000, // 25 MiB
       };
+      config.optimization.runtimeChunk = 'single';
     }
 
     if (process.env.ANALYZE) {
